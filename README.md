@@ -1,6 +1,6 @@
 # Ensemble Windows Registry
 
-This is a simple wrapper for the Win32 Registry.
+This is a simple wrapper for the [Win32 Registry](https://docs.microsoft.com/en-us/windows/win32/sysinfo/structure-of-the-registry).
 
 ## Usage
 
