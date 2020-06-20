@@ -2,7 +2,7 @@
 
 This is a simple wrapper for the Win32 Registry.
 
-## How to use it?
+## Usage
 
 First, we create an instance of `Registry` with a key of our program:
 
@@ -20,4 +20,18 @@ Then, we shall retrieve the integer:
 
 ```c++
 r->RegGetInt(true, "sample-integer");
+```
+
+## Install
+
+Make this repository a submodule by executing the following command after you `cd` to your program folder in the terminal:
+
+```shell script
+git submodule add https://github.com/yvan-burrie/ensemble-win-reg
+```
+
+Then, include the `CMakeLists.txt` from your root CMake script using:
+
+```cmake
+include("${CMAKE_SOURCE_DIR}/ensemble-win-reg/CMakeLists.txt")
 ```
