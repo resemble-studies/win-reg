@@ -19,5 +19,5 @@ r->RegSetInt(true, "sample-integer", 101);
 Then, we shall retrieve the integer:
 
 ```c++
-r->RegGetInt(true, "sample-integer")
+r->RegGetInt(true, "sample-integer");
 ```
