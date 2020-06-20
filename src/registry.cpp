@@ -93,7 +93,7 @@ bool Registry::RegSetInt(bool UseUserKey, LPCTSTR lptszName, int Value)
         lptszName,
         0,
         REG_DWORD,
-        (LPBYTE)Value,
+        (LPBYTE)&Value,
         sizeof(Value));
 
     return ERROR_SUCCESS == result;

@@ -12,14 +12,17 @@ using Ensemble::Registry;
 int main()
 {
     // Initialise:
-    auto k = "SOME_KEY";
-    auto r = new Registry(k);
+    auto r = new Registry("Software\\Some\\Stuff");
     bool b;
 
     // Sample integer:
     long i = 101;
-    b = r->RegSetInt(true, "sample-integer", i);
+    b = r->RegSetInt(false, "sample-integer", i);
     printf("Sample integer (%ld) added? %s", i, b ? "Y" : "N");
-    i = r->RegGetInt(true, "sample-integer");
+    i = r->RegGetInt(false, "sample-integer");
     printf("Sample integer retrieved: %ld", i);
+
+    delete r;
+
+    return 0;
 }
