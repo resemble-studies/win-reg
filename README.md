@@ -4,10 +4,18 @@ This is a simple wrapper for the [Win32 Registry](https://docs.microsoft.com/en-
 
 ## Usage
 
+Include the `Registry` class:
+
+```c++
+#include "inc/registry.cpp"
+
+using Ensemble::Registry;
+```
+
 First, we create an instance of `Registry` with a key of our program:
 
 ```c++
-auto r = new Registry("SOME_KEY");
+auto r = new Registry("Software\\Sample");
 ```
 
 Next, we shall add an integer into the registry:
@@ -19,12 +27,12 @@ r->RegSetInt(true, "sample-integer", 101);
 Then, we shall retrieve the integer:
 
 ```c++
-r->RegGetInt(true, "sample-integer");
+int i = r->RegGetInt(true, "sample-integer");
 ```
 
 ## Install
 
-Make this repository a submodule by executing the following command after you `cd` to your program folder in the terminal:
+You could make this repository a submodule by executing the following command after you `cd` to your program folder in the terminal:
 
 ```shell script
 git submodule add https://github.com/yvan-burrie/ensemble-win-reg
