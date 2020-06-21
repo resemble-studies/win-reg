@@ -20,7 +20,7 @@ Registry::Registry(LPCTSTR Key)
         KEY_ALL_ACCESS,
         nullptr,
         ghUserKey,
-        gdwDisp);
+        &gdwDisp);
 
     RegCreateKeyEx(
         HKEY_LOCAL_MACHINE,
@@ -31,7 +31,7 @@ Registry::Registry(LPCTSTR Key)
         KEY_ALL_ACCESS,
         nullptr,
         ghMachineKey,
-        gdwDisp);
+        &gdwDisp);
 
     RegCreateKeyEx(
         HKEY_LOCAL_MACHINE,
@@ -42,7 +42,7 @@ Registry::Registry(LPCTSTR Key)
         KEY_QUERY_VALUE,
         nullptr,
         ghMachineKeyRead,
-        gdwDisp);
+        &gdwDisp);
 }
 
 Registry::~Registry()
@@ -93,7 +93,7 @@ bool Registry::RegSetInt(bool UseUserKey, LPCTSTR lptszName, int Value)
         lptszName,
         0,
         REG_DWORD,
-        (LPBYTE)&Value,
+        (LPBYTE)Value,
         sizeof(Value));
 
     return ERROR_SUCCESS == result;

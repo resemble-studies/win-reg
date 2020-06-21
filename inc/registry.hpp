@@ -22,7 +22,7 @@ protected:
 
     HKEY* ghMachineKeyRead = nullptr;
 
-    LPDWORD gdwDisp = nullptr;
+    DWORD gdwDisp = 0;
 
     char Data[255]{};
 
