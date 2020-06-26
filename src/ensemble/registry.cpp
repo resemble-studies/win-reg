@@ -1,11 +1,12 @@
+/* License: MIT. See LICENSE in root directory. */
+
 /**
- * License: GPL 3.0. See LICENSE in root directory.
- * \date 2020/06/20
+ * \date 2020/06/27
  */
 
 #include <afxres.h>
 
-#include "../inc/registry.hpp"
+#include <ensemble/registry.hpp>
 
 namespace Ensemble {
 
@@ -15,10 +16,10 @@ Registry::Registry(LPCTSTR Key)
         HKEY_CURRENT_USER,
         Key,
         0,
-        nullptr,
+        NULL,
         REG_OPTION_NON_VOLATILE,
         KEY_ALL_ACCESS,
-        nullptr,
+        NULL,
         ghUserKey,
         &gdwDisp);
 
@@ -26,10 +27,10 @@ Registry::Registry(LPCTSTR Key)
         HKEY_LOCAL_MACHINE,
         Key,
         0,
-        nullptr,
+        NULL,
         REG_OPTION_NON_VOLATILE,
         KEY_ALL_ACCESS,
-        nullptr,
+        NULL,
         ghMachineKey,
         &gdwDisp);
 
@@ -37,45 +38,45 @@ Registry::Registry(LPCTSTR Key)
         HKEY_LOCAL_MACHINE,
         Key,
         0,
-        nullptr,
+        NULL,
         REG_OPTION_NON_VOLATILE,
         KEY_QUERY_VALUE,
-        nullptr,
+        NULL,
         ghMachineKeyRead,
         &gdwDisp);
 }
 
 Registry::~Registry()
 {
-    if (ghUserKey != nullptr)
+    if (ghUserKey != NULL)
     {
         RegCloseKey(*ghUserKey);
-        ghUserKey = nullptr;
+        ghUserKey = NULL;
     }
-    if (ghMachineKey != nullptr)
+    if (ghMachineKey != NULL)
     {
         RegCloseKey(*ghMachineKey);
-        ghMachineKey = nullptr;
+        ghMachineKey = NULL;
     }
-    if (ghMachineKeyRead != nullptr)
+    if (ghMachineKeyRead != NULL)
     {
         RegCloseKey(*ghMachineKeyRead);
-        ghMachineKeyRead = nullptr;
+        ghMachineKeyRead = NULL;
     }
 }
 
-bool Registry::RegDelete(bool UseUserKey, LPCTSTR lptszName)
+BOOL Registry::RegDelete(BOOL UseUserKey, LPCTSTR lptszName)
 {
-    auto result = RegDeleteValue(
+    DWORD result = RegDeleteValue(
         UseUserKey ? *ghUserKey : *ghMachineKey,
         lptszName);
 
     return ERROR_SUCCESS == result;
 }
 
-bool Registry::RegSet(bool UseUserKey, LPCTSTR lptszName, LPBYTE lpData, DWORD dwSize)
+BOOL Registry::RegSet(BOOL UseUserKey, LPCTSTR lptszName, LPBYTE lpData, DWORD dwSize)
 {
-    auto result = RegSetValueEx(
+    DWORD result = RegSetValueEx(
         UseUserKey ? *ghUserKey : *ghMachineKey,
         lptszName,
         0,
@@ -86,9 +87,9 @@ bool Registry::RegSet(bool UseUserKey, LPCTSTR lptszName, LPBYTE lpData, DWORD d
     return ERROR_SUCCESS == result;
 }
 
-bool Registry::RegSetInt(bool UseUserKey, LPCTSTR lptszName, int Value)
+BOOL Registry::RegSetInt(BOOL UseUserKey, LPCTSTR lptszName, INT Value)
 {
-    auto result = RegSetValueEx(
+    DWORD result = RegSetValueEx(
         UseUserKey ? *ghUserKey : *ghMachineKey,
         lptszName,
         0,
@@ -99,9 +100,9 @@ bool Registry::RegSetInt(bool UseUserKey, LPCTSTR lptszName, int Value)
     return ERROR_SUCCESS == result;
 }
 
-bool Registry::RegSetAscii(bool UseUserKey, LPCTSTR lptszName, LPBYTE lpData, DWORD dwSize)
+BOOL Registry::RegSetAscii(BOOL UseUserKey, LPCTSTR lptszName, LPBYTE lpData, DWORD dwSize)
 {
-    auto result = RegSetValueEx(
+    DWORD result = RegSetValueEx(
         UseUserKey ? *ghUserKey : *ghMachineKey,
         lptszName,
         0,
@@ -112,28 +113,28 @@ bool Registry::RegSetAscii(bool UseUserKey, LPCTSTR lptszName, LPBYTE lpData, DW
     return ERROR_SUCCESS == result;
 }
 
-const char* Registry::RegGetAscii(bool UseUserKey, LPCTSTR lptszName)
+LPCTSTR Registry::RegGetAscii(BOOL UseUserKey, LPCTSTR lptszName)
 {
     DWORD dwType = REG_SZ;
     DWORD dwSize = sizeof(Data);
 
-    auto result = RegQueryValueEx(
+    DWORD result = RegQueryValueEx(
         UseUserKey ? *ghUserKey : *ghMachineKeyRead,
         lptszName,
-        nullptr,
+        NULL,
         &dwType,
         (LPBYTE)Data,
         &dwSize);
 
-    return ERROR_SUCCESS == result ? Data : nullptr;
+    return ERROR_SUCCESS == result ? Data : NULL;
 }
 
-long Registry::RegGet(bool UseUserKey, LPCTSTR lptszName, LPBYTE lpData, LPDWORD lpdwDataSize)
+LONG Registry::RegGet(BOOL UseUserKey, LPCTSTR lptszName, LPBYTE lpData, LPDWORD lpdwDataSize)
 {
-    auto result = RegQueryValueEx(
+    DWORD result = RegQueryValueEx(
         UseUserKey ? *ghUserKey : *ghMachineKeyRead,
         lptszName,
-        nullptr,
+        NULL,
         lpdwDataSize,
         lpData,
         lpdwDataSize);
@@ -141,16 +142,16 @@ long Registry::RegGet(bool UseUserKey, LPCTSTR lptszName, LPBYTE lpData, LPDWORD
     return ERROR_SUCCESS == result;
 }
 
-int Registry::RegGetInt(bool UseUserKey, LPCTSTR lptszName, int defaultValue)
+INT Registry::RegGetInt(BOOL UseUserKey, LPCTSTR lptszName, INT defaultValue)
 {
-    int value = 0;
+    INT value = 0;
     DWORD cbData = sizeof(value);
     DWORD dwType = REG_DWORD;
     
-    auto result = RegQueryValueEx(
+    DWORD result = RegQueryValueEx(
         UseUserKey ? *ghUserKey : *ghMachineKeyRead,
         lptszName,
-        nullptr,
+        NULL,
         &dwType,
         (LPBYTE)value,
         &cbData);

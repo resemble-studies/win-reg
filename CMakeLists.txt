@@ -1,12 +1,18 @@
+# License: MIT. See LICENSE in root directory.
+# Date: 2020/06/27
 
-project(ENSEMBLE_WIN_REG)
+cmake_minimum_required(VERSION 3.0.1)
 
-set(CMAKE_CXX_STANDARD 11)
+project("ensemble-win-reg")
+
+set(CMAKE_CXX_STANDARD 98)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
+include_directories("${CMAKE_SOURCE_DIR}/inc")
+
 add_executable(
-    "ensemble-win-reg"
-    "${CMAKE_SOURCE_DIR}/inc/registry.hpp"
-    "${CMAKE_SOURCE_DIR}/src/registry.cpp"
+    "ensemble-win-reg-exe"
+    "${CMAKE_SOURCE_DIR}/inc/ensemble/registry.hpp"
+    "${CMAKE_SOURCE_DIR}/src/ensemble/registry.cpp"
     "${CMAKE_SOURCE_DIR}/test/main.cpp"
 )

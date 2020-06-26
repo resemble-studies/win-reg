@@ -1,18 +1,18 @@
 /**
- * License: GPL 3.0. See LICENSE in root directory.
+ * License: MIT. See LICENSE in root directory.
  * \date 2020/06/20
  */
 
 #include <cstdio>
 
-#include "../inc/registry.hpp"
+#include <ensemble/registry.hpp>
 
 using Ensemble::Registry;
 
 int main()
 {
     // Initialise:
-    auto r = new Registry("Software\\Sample");
+    Registry* r = new Registry("Software\\Sample");
     bool b;
 
     // Sample string:
@@ -27,8 +27,4 @@ int main()
     printf("Sample integer (%ld) added? %s", i, b ? "Y" : "N");
     i = r->RegGetInt(false, "sample-integer");
     printf("Sample integer retrieved: %ld", i);
-
-    delete r;
-
-    return 0;
 }
