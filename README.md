@@ -7,7 +7,7 @@ This is a simple wrapper for the [Win32 Registry](https://docs.microsoft.com/en-
 Include the `Registry` class:
 
 ```c++
-#include "inc/registry.cpp"
+#include <ensemble/registry.cpp>
 
 using Ensemble::Registry;
 ```
@@ -15,19 +15,19 @@ using Ensemble::Registry;
 First, we create an instance of `Registry` with a key of our program:
 
 ```c++
-auto r = new Registry("Software\\Sample");
+auto registry = new Registry("Software\\Sample");
 ```
 
 Next, we shall add an integer into the registry:
 
 ```c++
-r->RegSetInt(true, "sample-integer", 101);
+registry->RegSetInt(true, "sample-integer", 101);
 ```
 
 Then, we shall retrieve the integer:
 
 ```c++
-int i = r->RegGetInt(true, "sample-integer");
+int i = registry->RegGetInt(true, "sample-integer");
 ```
 
 ## Install
