@@ -11,7 +11,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 include_directories("${CMAKE_SOURCE_DIR}/inc")
 
 add_executable(
-    "ensemble-win-reg-exe"
+    "ensemble-win-reg"
     "${CMAKE_SOURCE_DIR}/inc/ensemble/registry.hpp"
     "${CMAKE_SOURCE_DIR}/src/ensemble/registry.cpp"
     "${CMAKE_SOURCE_DIR}/test/main.cpp"
