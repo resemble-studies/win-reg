@@ -1,17 +1,18 @@
 /* License: MIT. See LICENSE in root directory. */
 
 /**
- * \date 2020/06/27
+ * \date 2020/07/03
  */
 
 #pragma once
 
 #include <windef.h>
 
-namespace Ensemble {
+namespace Ensemble
+{
 
-class Registry {
-
+class Registry
+{
 protected:
 
     PHKEY ghMachineKey;

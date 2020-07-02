@@ -1,14 +1,15 @@
 /* License: MIT. See LICENSE in root directory. */
 
 /**
- * \date 2020/06/27
+ * \date 2020/07/03
  */
 
 #include <afxres.h>
 
 #include <ensemble/registry.hpp>
 
-namespace Ensemble {
+namespace Ensemble
+{
 
 Registry::Registry(LPCTSTR Key)
 {
@@ -147,7 +148,7 @@ INT Registry::RegGetInt(BOOL UseUserKey, LPCTSTR lptszName, INT defaultValue)
     INT value = 0;
     DWORD cbData = sizeof(value);
     DWORD dwType = REG_DWORD;
-    
+
     DWORD result = RegQueryValueEx(
         UseUserKey ? *ghUserKey : *ghMachineKeyRead,
         lptszName,
